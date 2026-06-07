@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #FAFAF9;
+  --ink: #1A2332;
+  --brand-turquoise: #00B5C8;
+  --brand-marine: #2D3E50;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--ink);
+  background: var(--bg);
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  font-feature-settings: "kern", "liga";
+}
+
+::selection {
+  background: var(--brand-turquoise);
+  color: white;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .container-prose {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  .label-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #00B5C8;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    background: #00B5C8;
+    color: white;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    transition: background 200ms ease, transform 200ms ease;
+    cursor: pointer;
+  }
+  .btn-primary:hover {
+    background: #0098AB;
+  }
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    background: transparent;
+    color: #2D3E50;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: 1.5px solid #2D3E50;
+    border-radius: 2px;
+    transition: all 200ms ease;
+    cursor: pointer;
+  }
+  .btn-secondary:hover {
+    background: #2D3E50;
+    color: white;
+  }
+}
+
+/* Loi linge — texture subtile */
+.bg-linen {
+  background-color: #F5F0EB;
+  background-image:
+    repeating-linear-gradient(45deg, rgba(45, 62, 80, 0.015) 0 1px, transparent 1px 8px),
+    repeating-linear-gradient(-45deg, rgba(45, 62, 80, 0.015) 0 1px, transparent 1px 8px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}
