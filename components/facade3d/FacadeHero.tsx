@@ -31,79 +31,24 @@ export default function FacadeHero() {
         onUpdate: (self) => setProgress(self.progress),
       });
 
-      // Apparition H1 : visible de 10 % à 65 %, puis disparaît
+      // Entrée immédiate de tout l'overlay (animation page load)
       gsap.fromTo(
-        h1Ref.current,
+        [promiseRef.current, h1Ref.current, h2Ref.current, ctaRef.current],
         { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top top",
-            end: "+=40%",
-            scrub: true,
-          },
-        }
-      );
-      gsap.to(h1Ref.current, {
-        opacity: 0,
-        y: -30,
-        ease: "power2.in",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "+=130%",
-          end: "+=180%",
-          scrub: true,
-        },
-      });
-
-      // H2 sous-titre
-      gsap.fromTo(
-        h2Ref.current,
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "+=20%",
-            end: "+=70%",
-            scrub: true,
-          },
-        }
+        { opacity: 1, y: 0, duration: 1.2, ease: "power3.out", stagger: 0.15 }
       );
 
-      // Promesse "Depuis 1975"
-      gsap.fromTo(
-        promiseRef.current,
-        { opacity: 0 },
+      // Disparition de tout l'overlay à mi-parcours (sur scroll)
+      gsap.to(
+        [promiseRef.current, h1Ref.current, h2Ref.current, ctaRef.current],
         {
-          opacity: 1,
-          ease: "power2.out",
+          opacity: 0,
+          y: -30,
+          ease: "power2.in",
           scrollTrigger: {
             trigger: containerRef.current,
-            start: "+=50%",
-            end: "+=110%",
-            scrub: true,
-          },
-        }
-      );
-
-      // CTA "Entrer dans le magasin"
-      gsap.fromTo(
-        ctaRef.current,
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "+=30%",
-            end: "+=80%",
+            start: "+=120%",
+            end: "+=180%",
             scrub: true,
           },
         }

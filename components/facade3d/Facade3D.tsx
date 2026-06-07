@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Environment, ContactShadows } from "@react-three/drei";
+import { ContactShadows } from "@react-three/drei";
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
@@ -27,10 +27,11 @@ function StoreFacade({ scrollProgress }: Props) {
     // Phase 2 (0.4 → 0.7) : ouverture portes
     // Phase 3 (0.7 → 1.0) : traversée du seuil
 
-    const camZ = THREE.MathUtils.lerp(28, -8, easeInOutCubic(t));
-    const camY = THREE.MathUtils.lerp(4, 2.2, easeInOutCubic(t));
+    const camZ = THREE.MathUtils.lerp(22, -8, easeInOutCubic(t));
+    const camY = THREE.MathUtils.lerp(7, 2.2, easeInOutCubic(t));
     cameraRef.position.set(0, camY, camZ);
-    cameraRef.lookAt(0, 2.5, camZ - 5);
+    const lookY = THREE.MathUtils.lerp(7, 2.5, easeInOutCubic(t));
+    cameraRef.lookAt(0, lookY, camZ - 8);
 
     // Portes
     const doorOpen = THREE.MathUtils.clamp((t - 0.4) / 0.3, 0, 1);
@@ -258,7 +259,7 @@ export default function Facade3D({ scrollProgress }: Props) {
   return (
     <Canvas
       shadows
-      camera={{ position: [0, 4, 28], fov: 55 }}
+      camera={{ position: [0, 7, 22], fov: 50 }}
       gl={{ antialias: true, powerPreference: "high-performance" }}
       dpr={[1, 2]}
     >
@@ -280,7 +281,8 @@ export default function Facade3D({ scrollProgress }: Props) {
         shadow-camera-top={20}
         shadow-camera-bottom={-5}
       />
-      <Environment preset="sunset" />
+      {/* Hémisphère light pour remplacer le HDR Environment */}
+      <hemisphereLight args={["#FFE8C0", "#5a4a3a", 0.6]} />
 
       <StoreFacade scrollProgress={scrollProgress} />
     </Canvas>

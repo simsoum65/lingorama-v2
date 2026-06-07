@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Environment, ContactShadows } from "@react-three/drei";
+import { OrbitControls, ContactShadows } from "@react-three/drei";
 import { useRef, useMemo } from "react";
 import * as THREE from "three";
 import type { ConfiguratorState } from "@/lib/configurator";
@@ -155,7 +155,7 @@ export default function Bed3D({ state }: Props) {
         shadow-mapSize={[1024, 1024]}
       />
       <directionalLight position={[-4, 5, -2]} intensity={0.4} color="#A0D4DC" />
-      <Environment preset="apartment" />
+      <hemisphereLight args={["#FFF5E4", "#3a3a4a", 0.5]} />
       <Bed state={state} />
       <OrbitControls
         enablePan={false}
